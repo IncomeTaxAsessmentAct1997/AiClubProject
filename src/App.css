@@ -1,42 +1,451 @@
+/* ============================================
+   AI Detection Survey - Premium Styles
+   ============================================ */
+
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  height: 100vh;
+  background: linear-gradient(180deg, #ffffff, #a6a6a6);
+  width: 100vw;
+  box-sizing: border-box;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.app-container {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+
+/* ============================================
+   Page Container Base
+   ============================================ */
+
+.page-container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   padding: 2rem;
+  box-sizing: border-box;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* ============================================
+   Age Collection Page
+   ============================================ */
+
+.age-page h1 {
+  font-size: 2.5rem;
+  color: #1a1a2e;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.age-page .subtitle {
+  font-size: 1.2rem;
+  color: #4a4a6a;
+  margin-bottom: 2rem;
+}
+
+.age-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 2.5rem;
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(10px);
+}
+
+.age-form label {
+  font-size: 1.1rem;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.age-form input {
+  width: 200px;
+  padding: 1rem 1.5rem;
+  font-size: 1.2rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  text-align: center;
+  transition: all 0.3s ease;
+  background: white;
+  color: #1a1a2e;
+}
+
+.age-form input:focus {
+  outline: none;
+  border-color: #646cff;
+}
+
+.age-form button {
+  padding: 1rem 2.5rem;
+  font-size: 1.1rem;
+  background: linear-gradient(135deg, #646cff, #5558e3);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+}
+
+.age-form button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.error-message {
+  color: #e53e3e;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+/* ============================================
+   Media Question Page
+   ============================================ */
+
+.media-page {
+  gap: 1.5rem;
+}
+
+.progress-indicator {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  font-size: 1rem;
+  color: #666;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+}
+
+.media-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  max-width: 800px;
+  width: 90%;
+}
+
+.media-content {
+  max-width: 100%;
+  max-height: 50vh;
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+  object-fit: contain;
+  background: #333;
+}
+
+.media-description {
+  font-size: 1rem;
+  color: #555;
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.button-container {
+  display: flex;
+  gap: 2rem;
+  margin-top: 1rem;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+.answer-button {
+  padding: 1.2rem 3rem;
+  font-size: 1.3rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 150px;
+}
+
+.ai-button {
+  background: linear-gradient(135deg, #9333ea, #7c3aed);
+  color: white;
+}
+
+.real-button {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+}
+
+/* ============================================
+   Follow-up Page
+   ============================================ */
+
+.followup-page {
+  gap: 1.5rem;
+}
+
+.answer-badge {
+  padding: 0.8rem 1.5rem;
+  border-radius: 30px;
+  color: white;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.followup-page h2 {
+  font-size: 1.8rem;
+  color: #1a1a2e;
+  text-align: center;
+}
+
+.followup-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  width: 90%;
+  max-width: 500px;
+}
+
+.followup-form textarea {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  resize: none;
+  font-family: inherit;
+  transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.9);
+  color: #1a1a2e;
+}
+
+.followup-form textarea:focus {
+  outline: none;
+  border-color: #646cff;
+}
+
+.followup-form button {
+  padding: 1rem 2.5rem;
+  font-size: 1.1rem;
+  background: linear-gradient(135deg, #646cff, #5558e3);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.skip-button {
+  background: transparent !important;
+  color: #888 !important;
+  text-decoration: underline;
+  padding: 0.5rem !important;
+}
+
+/* ============================================
+   Results Page
+   ============================================ */
+
+.results-page {
+  gap: 1.5rem;
+}
+
+.loading {
+  font-size: 3rem;
+}
+
+.result-badge {
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  color: white;
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.result-badge.correct {
+  background: linear-gradient(135deg, #10b981, #059669);
+}
+
+.result-badge.incorrect {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+}
+
+.result-text {
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.stats-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  width: 90%;
+  max-width: 400px;
+}
+
+.stats-container h3 {
+  margin: 0 0 1rem 0;
+  color: #333;
+}
+
+.percentage-bars {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.bar-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+}
+
+.bar-label {
+  width: 40px;
+  font-weight: 600;
+  color: #333;
+  text-align: right;
+}
+
+.bar-track {
+  flex: 1;
+  height: 24px;
+  background: #e0e0e0;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.bar-fill {
+  height: 100%;
+  border-radius: 12px;
+}
+
+.bar-fill.ai-fill {
+  background: linear-gradient(90deg, #9333ea, #7c3aed);
+}
+
+.bar-fill.real-fill {
+  background: linear-gradient(90deg, #10b981, #059669);
+}
+
+.bar-percentage {
+  width: 45px;
+  font-weight: 600;
+  color: #333;
+}
+
+.agreement-text {
+  font-size: 1.1rem;
+  color: #333;
+  margin-top: 0.5rem;
+}
+
+.continue-button {
+  padding: 1rem 2.5rem;
+  font-size: 1.1rem;
+  background: linear-gradient(135deg, #646cff, #5558e3);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* ============================================
+   Completion Page
+   ============================================ */
+
+.completion-page {
+  gap: 1rem;
+  text-align: center;
+}
+
+.celebration-icon {
+  font-size: 5rem;
+}
+
+.completion-page h1 {
+  font-size: 2.5rem;
+  color: #1a1a2e;
+  margin: 0;
+}
+
+.completion-text {
+  font-size: 1.3rem;
+  color: #333;
+  margin: 0;
+}
+
+.completion-subtext {
+  font-size: 1rem;
+  color: #666;
+  max-width: 400px;
+}
+
+.stats-summary {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 1.5rem;
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  margin: 1rem 0;
+}
+
+.stats-summary p {
+  margin: 0;
+  color: #444;
+  line-height: 1.6;
+}
+
+.restart-button {
+  padding: 1rem 2.5rem;
+  font-size: 1.1rem;
+  background: linear-gradient(135deg, #646cff, #5558e3);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+}
+
+/* ============================================
+   Responsive Design
+   ============================================ */
+
+@media (max-width: 768px) {
+  .age-page h1 {
+    font-size: 1.8rem;
   }
-  to {
-    transform: rotate(360deg);
+
+  .button-container {
+    flex-direction: column;
+    gap: 1rem;
   }
-}
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+  .answer-button {
+    min-width: 200px;
   }
-}
 
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+  .media-content {
+    max-height: 40vh;
+  }
 }
