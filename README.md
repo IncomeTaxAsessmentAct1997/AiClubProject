@@ -1,5 +1,3 @@
-Website Template License (Plain English Version)
-
 Copyright © 2026 Duncan Jones
 All rights reserved.
 
