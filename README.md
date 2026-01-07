@@ -1,18 +1,36 @@
-# React + Vite
+Website Template License (Plain English Version)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Copyright © 2026 Duncan Jones
+All rights reserved.
 
-Currently, two official plugins are available:
+This website is provided as a template only.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+You are allowed to:
+- Use this website as a starting point for your own personal or non-commercial projects.
+- Change it, edit it, and build something new using it.
+- Share your finished project as long as it is not used to make money.
 
-## React Compiler
+You are NOT allowed to:
+- Use this website or anything made from it to make money.
+- Sell it, license it, or use it in paid work or services.
+- Share this website as a template, even if you change it.
+- Upload it (or very similar versions) to template sites, stores, or public downloads.
+- Use it as-is or with only small changes and call it your own.
+- Say that you made the original template.
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+Credit:
+- Giving credit is optional.
+- If you want to give credit, you can say:
+  “Based on a template by [YOUR NAME / WEBSITE].”
 
-Note: This will impact Vite dev & build performances.
+Ownership:
+- You own the changes and content you add.
+- The original template still belongs to the creator.
 
-## Expanding the ESLint configuration
+No guarantees:
+- This template is provided “as is”.
+- The creator is not responsible for any problems, damage, or losses caused by using it.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+If you break these rules:
+- You lose permission to use this template.
+- You must stop using it and delete all copies.
