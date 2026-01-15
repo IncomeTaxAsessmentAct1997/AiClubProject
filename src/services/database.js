@@ -184,6 +184,46 @@ export async function getStatistics(mediaId) {
   };
 }
 
+export async function getTotalStatistics(mediaId) {
+  const { data: allRows } = await supabase
+    .from('choice')
+    .select('data');
+
+  if (!allRows?.length) {
+    return {
+      mediaId,
+      totalResponses: 0,
+      correctCount: 0,
+      incorrectCount: 0,
+      percentageReal: 50,
+      percentageAI: 50
+    };
+  }
+
+  const mediaIndex = parseInt(String(mediaId).replace(/media_?/g, '')) - 1;
+  let totalCorrect = 0;
+  let totalIncorrect = 0;
+
+  allRows.forEach(row => {
+    if (row.data?.questions?.[mediaIndex]) {
+      const q = row.data.questions[mediaIndex];
+      totalCorrect += q.correct_value || 0;
+      totalIncorrect += q.incorrect_value || 0;
+    }
+  });
+
+  const total = totalCorrect + totalIncorrect;
+
+  return {
+    mediaId,
+    totalResponses: total,
+    correctCount: totalCorrect,
+    incorrectCount: totalIncorrect,
+    percentageReal: total > 0 ? Math.round((totalCorrect / total) * 100) : 50,
+    percentageAI: total > 0 ? Math.round((totalIncorrect / total) * 100) : 50
+  };
+}
+
 export async function getAllStatistics() {
   const { data } = await supabase.from('choice').select('*');
   return data || [];

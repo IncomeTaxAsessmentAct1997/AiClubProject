@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { getStatistics } from '../services/database';
+import { getStatistics, getTotalStatistics } from '../services/database';
 import { mediaItems, TOTAL_MEDIA_ITEMS } from '../data/mediaItems';
 
 const ResultsPage = ({ currentAnswer }) => {
@@ -11,13 +11,16 @@ const ResultsPage = ({ currentAnswer }) => {
   const mediaItem = mediaItems[index];
 
   const [stats, setStats] = useState(null);
+  const [totalStats, setTotalStats] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchStats = async () => {
       try {
         const statistics = await getStatistics(mediaItem.id);
+        const allStatistics = await getTotalStatistics(mediaItem.id);
         setStats(statistics);
+        setTotalStats(allStatistics);
       } finally {
         setIsLoading(false);
       }
@@ -37,6 +40,7 @@ const ResultsPage = ({ currentAnswer }) => {
 
   const isCorrect = currentAnswer === mediaItem.correctAnswer;
   const agreementPercentage = stats ? (isCorrect ? stats.percentageReal : stats.percentageAI) : 0;
+  const totalAgreementPercentage = totalStats ? (isCorrect ? totalStats.percentageReal : totalStats.percentageAI) : 0;
 
   return (
     <motion.div
@@ -80,7 +84,7 @@ const ResultsPage = ({ currentAnswer }) => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6 }}
           >
-            <h3>How others did:</h3>
+            <h3>Your age group:</h3>
 
             <div className="percentage-bars">
               <div className="bar-container">
@@ -130,7 +134,67 @@ const ResultsPage = ({ currentAnswer }) => {
               animate={{ opacity: 1 }}
               transition={{ delay: 2.7 }}
             >
-              <strong>{agreementPercentage}%</strong> of users {isCorrect ? 'your age also got it correct' : 'your age also got it wrong'}!
+              <strong>{agreementPercentage}%</strong> of users your age also got it {isCorrect ? 'correct' : 'wrong'}!
+            </motion.p>
+          </motion.div>
+
+          <motion.div
+            className="stats-container"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.8 }}
+          >
+            <h3>All users:</h3>
+
+            <div className="percentage-bars">
+              <div className="bar-container">
+                <span className="bar-label">Correct</span>
+                <div className="bar-track">
+                  <motion.div
+                    className="bar-fill real-fill"
+                    initial={{ width: 0 }}
+                    animate={{ width: `${totalStats.percentageReal}%` }}
+                    transition={{ delay: 1, duration: 1.5, ease: [0.25, 0.46, 0.45, 0.94] }}
+                  />
+                </div>
+                <motion.span
+                  className="bar-percentage"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 2.5 }}
+                >
+                  {totalStats.percentageReal}%
+                </motion.span>
+              </div>
+
+              <div className="bar-container">
+                <span className="bar-label">Wrong</span>
+                <div className="bar-track">
+                  <motion.div
+                    className="bar-fill ai-fill"
+                    initial={{ width: 0 }}
+                    animate={{ width: `${totalStats.percentageAI}%` }}
+                    transition={{ delay: 1.2, duration: 1.5, ease: [0.25, 0.46, 0.45, 0.94] }}
+                  />
+                </div>
+                <motion.span
+                  className="bar-percentage"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 2.7 }}
+                >
+                  {totalStats.percentageAI}%
+                </motion.span>
+              </div>
+            </div>
+
+            <motion.p
+              className="agreement-text"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 2.9 }}
+            >
+              <strong>{totalAgreementPercentage}%</strong> of all users also got it {isCorrect ? 'correct' : 'wrong'}!
             </motion.p>
           </motion.div>
 
