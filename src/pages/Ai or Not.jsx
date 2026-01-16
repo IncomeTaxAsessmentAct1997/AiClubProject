@@ -9,12 +9,21 @@ const MediaQuestionPage = ({ onAnswer }) => {
   const index = parseInt(mediaIndex) - 1;
   const mediaItem = mediaItems[index];
 
+  console.log('MediaQuestionPage Debug:');
+  console.log('- mediaIndex from params:', mediaIndex);
+  console.log('- calculated index:', index);
+  console.log('- mediaItem:', mediaItem);
+  console.log('- total mediaItems:', mediaItems.length);
+  console.log('- mediaItem url:', mediaItem?.url);
+
   if (!mediaItem) {
+    console.error('No media item found for index:', index);
     navigate('/');
     return null;
   }
 
   const handleAnswer = (answer) => {
+    console.log('Answer selected:', answer, 'for media:', mediaItem.id);
     onAnswer(mediaItem.id, answer);
     navigate(`/followup/${mediaIndex}`);
   };
@@ -50,12 +59,16 @@ const MediaQuestionPage = ({ onAnswer }) => {
             muted
             loop
             className="media-content"
+            onError={(e) => console.error('Video load error:', e, 'URL:', mediaItem.url)}
+            onLoadedData={() => console.log('Video loaded successfully:', mediaItem.url)}
           />
         ) : (
           <img
             src={mediaItem.url}
             alt={mediaItem.description}
             className="media-content"
+            onError={(e) => console.error('Image load error:', e.target.src, 'Failed to load')}
+            onLoad={() => console.log('Image loaded successfully:', mediaItem.url)}
           />
         )}
         <motion.p
