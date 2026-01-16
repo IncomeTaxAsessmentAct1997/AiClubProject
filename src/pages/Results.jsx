@@ -4,6 +4,63 @@ import { motion } from 'framer-motion';
 import { getStatistics, getTotalStatistics } from '../services/database';
 import { mediaItems, TOTAL_MEDIA_ITEMS } from '../data/mediaItems';
 
+const Confetti = ({ numberOfPieces = 500 }) => {
+  const [pieces, setPieces] = useState([]);
+
+  useEffect(() => {
+    const newPieces = Array.from({ length: numberOfPieces }, (_, i) => ({
+      id: i,
+      x: Math.random() * window.innerWidth,
+      y: -20,
+      rotation: Math.random() * 360,
+      color: ['#ff6b6b', '#4ecdc4', '#45b7d1', '#f9ca24', '#6c5ce7', '#fd79a8'][Math.floor(Math.random() * 6)],
+      velocityX: (Math.random() - 0.5) * 4,
+      velocityY: Math.random() * 3 + 2,
+      rotationSpeed: (Math.random() - 0.5) * 10,
+    }));
+    setPieces(newPieces);
+
+    const interval = setInterval(() => {
+      setPieces(prev => prev.map(piece => ({
+        ...piece,
+        x: piece.x + piece.velocityX,
+        y: piece.y + piece.velocityY,
+        rotation: piece.rotation + piece.rotationSpeed,
+        velocityY: piece.velocityY + 0.1,
+      })).filter(piece => piece.y < window.innerHeight));
+    }, 16);
+
+    return () => clearInterval(interval);
+  }, [numberOfPieces]);
+
+  return (
+    <div style={{
+      position: 'fixed',
+      top: 0,
+      left: 0,
+      width: '100%',
+      height: '100%',
+      pointerEvents: 'none',
+      zIndex: 9999
+    }}>
+      {pieces.map(piece => (
+        <div
+          key={piece.id}
+          style={{
+            position: 'absolute',
+            left: piece.x,
+            top: piece.y,
+            width: '10px',
+            height: '10px',
+            backgroundColor: piece.color,
+            transform: `rotate(${piece.rotation}deg)`,
+          }}
+        />
+      ))}
+    </div>
+  );
+};
+
 const ResultsPage = ({ currentAnswer }) => {
   const navigate = useNavigate();
   const { mediaIndex } = useParams();
@@ -13,6 +70,7 @@ const ResultsPage = ({ currentAnswer }) => {
   const [stats, setStats] = useState(null);
   const [totalStats, setTotalStats] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [showConfetti, setShowConfetti] = useState(false);
 
   useEffect(() => {
     const fetchStats = async () => {
@@ -28,6 +86,14 @@ const ResultsPage = ({ currentAnswer }) => {
 
     fetchStats();
   }, [mediaItem.id]);
+
+  useEffect(() => {
+    if (!isLoading && isCorrect) {
+      setShowConfetti(true);
+      const timer = setTimeout(() => setShowConfetti(false), 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [isLoading]);
 
   const handleContinue = () => {
     const nextIndex = parseInt(mediaIndex) + 1;
@@ -50,6 +116,7 @@ const ResultsPage = ({ currentAnswer }) => {
       exit={{ opacity: 0, x: -100 }}
       transition={{ duration: 0.5 }}
     >
+      {showConfetti && <Confetti numberOfPieces={500} />}
       {isLoading ? (
         <motion.div
           className="loading"

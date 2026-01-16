@@ -3,10 +3,18 @@ import { supabase } from './customClient';
 const CORRECT_ANSWERS = {
   'media_1': 'Real',
   'media_2': 'AI',
-  'media_3': 'AI',
-  'media_4': 'Real',
-  'media_5': 'Real',
-  'media_6': 'AI'
+  'media_3': 'Real',
+  'media_4': 'AI',
+  'media_5': 'AI',
+  'media_6': 'Real',
+  'media_7': 'AI',
+  'media_8': 'Real',
+  'media_9': 'Real',
+  'media_10': 'AI',
+  'media_11': 'AI',
+  'media_12': 'Real',
+  'media_13': 'AI',
+  'media_14': 'Real'
 };
 
 const generateId = () => `${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
@@ -22,7 +30,7 @@ export async function createUser(userData) {
 
   if (!existingRows?.length) {
     const initialData = {
-      questions: Array(5).fill({ incorrect_value: 0, correct_value: 0 })
+      questions: Array(14).fill({ incorrect_value: 0, correct_value: 0 })
     };
 
     await supabase
@@ -63,7 +71,7 @@ export async function submitResponse(responseData) {
     const currentWhy = existingRow.why || [];
     
     currentData.questions = currentData.questions || [];
-    while (currentData.questions.length < 5) {
+    while (currentData.questions.length < 14) {
       currentData.questions.push({ incorrect_value: 0, correct_value: 0 });
     }
 
@@ -84,7 +92,7 @@ export async function submitResponse(responseData) {
       .eq('id', existingRow.id);
   } else {
     const newData = {
-      questions: Array(5).fill({ incorrect_value: 0, correct_value: 0 })
+      questions: Array(14).fill({ incorrect_value: 0, correct_value: 0 })
     };
     newData.questions[mediaIndex] = {
       incorrect_value: isCorrect ? 0 : 1,
